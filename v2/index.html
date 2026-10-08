@@ -3,7 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="robots" content="noindex">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<meta name="robots" content="noai, noimageai">
 <title>Backpocket · Back-Office Agent for Electrical Contractors</title>
 <meta name="description" content="Backpocket handles the receipts, job costs, bids, pay apps, overdue invoices, and after-hours calls that pull electrical contractors off the job. You approve before anything goes out.">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%231f4fd8'/%3E%3Cpath d='M35 7 17 35h13l-2 22 19-31H34z' fill='%23fff'/%3E%3C/svg%3E">
@@ -233,6 +234,7 @@
   .foot{background:var(--deep);color:var(--on-deep-soft);padding-block:30px;font-size:14px}
   .foot a{color:#fff}
   [hidden]{display:none!important}
+  .err{margin:12px 0 0;color:var(--rust);font-size:14.5px}
 
   /* motion: content enters once, in reading order */
   html.rv .reveal:not(.in){opacity:0;transform:translateY(22px)}
@@ -542,10 +544,12 @@
           <div class="field"><label for="co">Company</label><input id="co" type="text" autocomplete="organization"></div>
         </div>
         <div class="field"><label for="em">Email or phone</label><input id="em" type="text" required autocomplete="email"></div>
+        <input type="text" id="hp" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px">
         <button class="btn" type="submit" style="width:100%">Run my free workflow check</button>
+        <p class="err" id="err" role="alert" hidden>That did not send. Please try again in a minute, or <a href="mailto:kuhnenba@gmail.com">email us</a>.</p>
         <p class="promise">No login and no access to your accounting system. Nothing goes to your GCs.</p>
         <div class="sent" id="sent" hidden>
-          <b>Your email app is opening with the request filled in.</b>
+          <b>Request sent. We'll reply within two business days.</b>
           <pre id="sentText"></pre>
         </div>
       </form>
@@ -553,7 +557,7 @@
   </section>
 </main>
 
-<footer class="foot"><div class="wrap">Backpocket &middot; Example data is clearly labeled. This page does not store what you enter. Hero photo by Bulat843 on <a href="https://www.pexels.com/photo/electrician-diagnosing-electrical-panel-with-multimeter-34054464/" target="_blank" rel="noopener">Pexels</a>.</div></footer>
+<footer class="foot"><div class="wrap">Backpocket &middot; Example data is clearly labeled. Your request is emailed to the Backpocket team and is not stored on this site. Hero photo by Bulat843 on <a href="https://www.pexels.com/photo/electrician-diagnosing-electrical-panel-with-multimeter-34054464/" target="_blank" rel="noopener">Pexels</a>.</div></footer>
 
 <script>
 (function(){
@@ -659,23 +663,33 @@
   ['hrs','cost','share','rec','fee'].forEach(function(id){ $(id).addEventListener('input', calc); });
   calc();
 
+  var FORM_ENDPOINT = 'https://formsubmit.co/ajax/kuhnenba@gmail.com';
   $('form').addEventListener('submit', function(e){
     e.preventDefault();
-    if (!$('form').checkValidity()) {
-      $('form').reportValidity();
-      return;
-    }
-    var lines = [
-      'Hand off first: ' + $('first').value,
-      'Useful result: ' + ($('useful').value || '(not filled in)'),
-      'Name: ' + ($('nm').value || '(not filled in)'),
-      'Company: ' + ($('co').value || '(not filled in)'),
-      'Contact: ' + ($('em').value || '(not filled in)')
-    ];
-    $('sentText').textContent = lines.join('\n');
-    $('sent').hidden = false;
-    var subject = 'Backpocket free workflow check - ' + ($('co').value || $('nm').value);
-    window.location.href = 'mailto:kuhnenba@gmail.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(lines.join('\n'));
+    var form = $('form');
+    if (!form.checkValidity()) { form.reportValidity(); return; }
+    if ($('hp').value) return;
+    var btn = form.querySelector('button[type="submit"]'), label = btn.textContent, err = $('err');
+    err.hidden = true; $('sent').hidden = true;
+    btn.disabled = true; btn.textContent = 'Sending...';
+    var fields = {
+      'Chosen workflow': $('first').value,
+      'Useful result': $('useful').value || '(not filled in)',
+      'Name': $('nm').value || '(not filled in)',
+      'Company': $('co').value || '(not filled in)',
+      'Contact': $('em').value || '(not filled in)'
+    };
+    var payload = Object.assign({_subject: 'Backpocket free workflow check - ' + ($('co').value || $('nm').value), _template: 'table', _captcha: 'false'}, fields);
+    fetch(FORM_ENDPOINT, {method: 'POST', headers: {'Content-Type': 'application/json', 'Accept': 'application/json'}, body: JSON.stringify(payload)})
+      .then(function(r){ return r.json().catch(function(){ return {}; }).then(function(d){ return {ok: r.ok, d: d}; }); })
+      .then(function(x){
+        if (!x.ok || String(x.d.success) === 'false') throw new Error('not sent');
+        $('sentText').textContent = Object.keys(fields).map(function(k){ return k + ': ' + fields[k]; }).join('\n');
+        $('sent').hidden = false;
+        form.reset();
+      })
+      .catch(function(){ err.hidden = false; })
+      .then(function(){ btn.disabled = false; btn.textContent = label; });
   });
 
   Array.prototype.forEach.call(document.querySelectorAll('[data-pick]'), function(a){
