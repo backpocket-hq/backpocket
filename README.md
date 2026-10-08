@@ -15,3 +15,8 @@ Make changes on a branch and open a pull request before merging into main. Once 
 ## Assets
 
 Electrical-work photo: Pexels photo 34054464, attributed on the page.
+
+## Versions
+
+- `/` is v6, the page Brad published first.
+- `/v2/` is the redesigned page (back-office agent, photo hero, job switcher). It lives in its own folder, so v6 stays untouched. On Pages it is at `/backpocket/v2/`.
