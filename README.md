@@ -30,3 +30,13 @@ Electrical-work photo: Pexels photo 34054464, attributed on the page.
 ## Custom domain
 
 The `CNAME` file sets the Pages custom domain to `getbackpocketai.com`. Do not delete it. DNS lives at Namecheap: four A records on the root pointing to GitHub Pages (185.199.108.153, 185.199.109.153, 185.199.110.153, 185.199.111.153) and a CNAME for `www` pointing to `backpocket-hq.github.io`. Keep the Google MX, SPF, DKIM, and verification records on the same domain untouched.
+
+## Versions on the site
+
+- `/` is v9, the current page (copy of `/v2/`).
+- `/v2/` is v9 at its earlier address. Keep it so links already sent still work.
+- `/v1/` is the old v6 page. Kept for reference. Delete when Jon and Brad agree.
+
+## Form
+
+The form posts to FormSubmit, which emails `hello@getbackpocketai.com`. The first submission sends a one-time activation email to that inbox. Click the link in it once. Make sure `hello@` exists as a mailbox or alias first.
