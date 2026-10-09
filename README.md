@@ -26,3 +26,7 @@ Electrical-work photo: Pexels photo 34054464, attributed on the page.
 - Both pages carry `noindex, nofollow, noarchive, nosnippet, noimageindex` and `noai, noimageai` meta tags.
 - `robots.txt` disallows all crawlers and the common AI scrapers. Crawlers only read it from the domain root, so copy it into a repo named `backpocket-hq.github.io` (an organization owner creates that repo).
 - These are requests, not locks. Anyone with a link can open the page, and a scraper can ignore the rules. Real access control needs a password or login in front of the site.
+
+## Custom domain
+
+The `CNAME` file sets the Pages custom domain to `getbackpocketai.com`. Do not delete it. DNS lives at Namecheap: four A records on the root pointing to GitHub Pages (185.199.108.153, 185.199.109.153, 185.199.110.153, 185.199.111.153) and a CNAME for `www` pointing to `backpocket-hq.github.io`. Keep the Google MX, SPF, DKIM, and verification records on the same domain untouched.
