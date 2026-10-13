@@ -39,4 +39,6 @@ The `CNAME` file sets the Pages custom domain to `getbackpocketai.com`. Do not d
 
 ## Form
 
-The form posts to FormSubmit, which emails `hello@getbackpocketai.com`. The first submission sends a one-time activation email to that inbox. Click the link in it once. Make sure `hello@` exists as a mailbox or alias first.
+The form posts to FormSubmit, which emails the Backpocket team inbox. The first submission sends a one-time activation email to that inbox. Click the link in it once.
+
+The page must not show the inbox address. After activation, FormSubmit gives a random alias for the form. Put that alias in `FORM_ENDPOINT` in each `index.html` in place of the email address.
