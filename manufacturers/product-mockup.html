@@ -254,7 +254,7 @@
     .side .co,.side .src{display:none}
     .side button{width:auto;white-space:nowrap;flex:none;gap:10px}
     .main{padding:24px 20px 18px;min-height:0}
-    .cols,.split{grid-template-columns:1fr}
+    .cols,.split,.gaps{grid-template-columns:1fr}
   }
   @media (max-width:700px){
     .hero-in{padding-block:56px 96px}
@@ -279,6 +279,31 @@
     html.rv .reveal:not(.in){opacity:1;transform:none}
   }
 
+.scope{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 18px}
+  .sc{font:600 13px var(--body);padding:5px 12px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--soft)}
+  .sc.ok{color:var(--good);background:var(--good-tint);border-color:transparent}
+  .sc.no{color:var(--rust);background:var(--rust-tint);border-color:transparent}
+  .tier{display:inline-flex;align-items:center;gap:6px;font:700 12px var(--body);letter-spacing:.02em;padding:4px 10px;border-radius:999px;white-space:nowrap;flex:none}
+  .tier i{font-style:normal;font-size:11px}
+  .tier.t-r{background:color-mix(in srgb,var(--ink) 8%,transparent);color:var(--soft)}
+  .tier.t-w{background:var(--cobalt-tint);color:var(--cobalt)}
+  .tier.t-d{background:var(--rust-tint);color:var(--rust);outline:1.5px solid var(--rust);outline-offset:-1.5px}
+  .legend{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;margin-top:18px;font-size:13.5px;color:var(--soft)}
+  .grp + .grp{border-top:2px solid var(--line)}
+  .gh{display:flex;flex-wrap:wrap;align-items:center;gap:10px;padding:12px 20px;background:color-mix(in srgb,var(--ink) 4%,var(--card));font-size:14px;color:var(--soft)}
+  .gh .ab{margin-left:auto}
+  .grp.d{border-left:5px solid var(--rust)}
+  .grp.d .gh{background:var(--rust-tint);color:var(--ink)}
+  .ab.d{background:var(--rust);border-color:var(--rust);color:#fff}
+  .irr{font:700 12px var(--body);color:var(--amber);background:var(--amber-tint);padding:4px 10px;border-radius:999px;white-space:nowrap}
+  .gaps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:16px}
+  .gaps .box h4{margin-bottom:6px}
+  .gaps .v h4{color:var(--good)} .gaps .a h4{color:var(--amber)} .gaps .x h4{color:var(--rust)}
+  .filters{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+  .log .ab{min-height:30px;padding:0 12px;font-size:12.5px}
+  .log tr[hidden]{display:none}
+  .log table{min-width:0}
+  .log td,.log th{padding-inline:10px}
   body{padding-block:24px 40px}
   .page{max-width:1180px;margin:0 auto;padding-inline:max(16px,env(safe-area-inset-left,0px))}
   .top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
@@ -293,30 +318,41 @@
         <div class="side" role="tablist" aria-label="Product screens" aria-orientation="vertical">
           <div class="co"><b>Back Office</b><small>Harbor Fabrication</small></div>
           <button role="tab" aria-selected="true" data-go="home">Home</button>
-          <button role="tab" aria-selected="false" data-go="drift">Drift <i>3</i></button>
-          <button role="tab" aria-selected="false" data-go="inbox">Inbox <i>9</i></button>
+          <button role="tab" aria-selected="false" data-go="drift">Drift <i>2</i></button>
+          <button role="tab" aria-selected="false" data-go="inbox">Inbox <i>5</i></button>
           <button role="tab" aria-selected="false" data-go="activity">Activity</button>
           <button role="tab" aria-selected="false" data-go="conn">Connections</button>
-          <div class="src"><span>QuickBooks Online (read-only)</span><span>Quotes and orders sheet</span><span>Inventory and BOM sheet</span><span>Email inbox</span></div>
+          <div class="src"><span>QuickBooks Online</span><span>Quotes and orders sheet</span><span>Inventory and BOM sheet</span><span>Email inbox</span></div>
         </div>
 
         <div class="main">
+          <div class="scope" aria-label="What it can and cannot do"><span class="sc ok">Can: read your sources and draft fixes</span><span class="sc no">Cannot: send email on its own</span><span class="sc no">Cannot: change a record without your approval</span></div>
           <!-- HOME -->
           <div class="scr" id="s-home" role="tabpanel">
             <div class="scr-h"><div><h3>What it found, drafted, and needs from you</h3><p class="scr-sub">Overnight, the system read your sources, checked them, and drafted the fixes.</p></div><span class="sample">Sample data</span></div>
             <div class="stats">
-              <div class="stat c1"><b>6</b><span>Waiting for your approval</span></div>
-              <div class="stat c2"><b>9</b><span>Gaps found, requests drafted</span></div>
-              <div class="stat c3"><b>3</b><span>Records that disagree</span></div>
+              <div class="stat c1"><b>5</b><span>Waiting for your approval</span></div>
+              <div class="stat c2"><b>5</b><span>Gaps found, requests drafted</span></div>
+              <div class="stat c3"><b>2</b><span>Records that disagree</span></div>
               <div class="stat c4"><b>41</b><span>Checked and clean this week</span></div>
             </div>
+            <div class="legend"><span class="tier t-r"><i>&#9679;</i>Read</span>runs without asking<span class="tier t-w"><i>&#9670;</i>Write</span>asks once per group<span class="tier t-d"><i>&#9650;</i>Destructive</span>asks every time</div>
             <div class="qcard">
-              <div class="qh">Approval queue <span>Nothing changes or goes out until you click.</span></div>
-              <div class="qrow"><div class="ic">$</div><div><b>Invoice INV-5510 does not match the customer PO</b><small>Billed $51,240. Customer PO #88417 says $48,600. Credit memo drafted.</small></div><span class="pill bad">Drift</span><div class="act"><button class="ab" data-go="drift" type="button">Review</button><span class="ab p">Approve</span></div></div>
-              <div class="qrow"><div class="ic">PO</div><div><b>Receive PO-1187 against vendor bill</b><small>Bill from Alder Steel Supply matches the PO. Ready to enter in QuickBooks.</small></div><span class="pill ok">Match found</span><div class="act"><span class="ab">Review</span><span class="ab p">Approve</span></div></div>
-              <div class="qrow"><div class="ic">?</div><div><b>Vendor bill with no purchase order</b><small>Bill #7731, Keystone Fasteners, $3,180. Asking the buyer which PO it belongs to.</small></div><span class="pill amb">Missing data</span><div class="act"><button class="ab" data-go="inbox" type="button">Edit request</button><span class="ab p">Send</span></div></div>
-              <div class="qrow"><div class="ic">Q</div><div><b>Quote Q-2304 accepted, no order entered</b><small>Customer replied yes by email Tuesday. Order row and BOM draft ready.</small></div><span class="pill warn">New order</span><div class="act"><span class="ab">Review</span><span class="ab p">Approve</span></div></div>
-              <div class="qrow"><div class="ic">#</div><div><b>Part 4410 cost is $0 in the BOM sheet</b><small>Latest vendor invoice shows $1.86 each. Update proposed. Margin on 3 open quotes changes.</small></div><span class="pill bad">Drift</span><div class="act"><span class="ab">Review</span><span class="ab p">Approve</span></div></div>
+              <div class="qh">Approval queue, sorted by risk <span>Nothing changes or goes out until you click.</span></div>
+              <div class="grp d">
+                <div class="gh"><span class="tier t-d"><i>&#9650;</i>Destructive</span>Changes a posted invoice. Asks every time, on its own.</div>
+                <div class="qrow"><div class="ic">$</div><div><b>Invoice INV-5510 does not match the customer PO</b><small>Billed $51,240. Customer PO #88417 says $48,600. Credit memo of $2,640 drafted. Undo stays available.</small></div><span class="pill bad">Drift</span><div class="act"><button class="ab d" data-go="drift" type="button">Review and confirm</button></div></div>
+              </div>
+              <div class="grp">
+                <div class="gh"><span class="tier t-w"><i>&#9670;</i>Write</span>3 changes to your records. Each can be undone.<span class="ab p">Approve all 3</span></div>
+                <div class="qrow"><div class="ic">PO</div><div><b>Receive PO-1187 against vendor bill</b><small>Bill from Alder Steel Supply matches the PO. 1 bill to enter in QuickBooks.</small></div><span class="pill ok">Match found</span><div class="act"><span class="ab">Review</span></div></div>
+                <div class="qrow"><div class="ic">Q</div><div><b>Quote Q-2304 accepted, no order entered</b><small>Customer replied yes by email Tuesday. 1 order row and 1 BOM draft ready.</small></div><span class="pill warn">New order</span><div class="act"><span class="ab">Review</span></div></div>
+                <div class="qrow"><div class="ic">#</div><div><b>Part 4410 cost is $0 in the BOM sheet</b><small>Latest vendor invoice shows $1.86 each. 1 cost changes. Margin on 3 open quotes changes.</small></div><span class="pill bad">Drift</span><div class="act"><span class="ab">Review</span></div></div>
+              </div>
+              <div class="grp">
+                <div class="gh"><span class="tier t-w"><i>&#9670;</i>Write</span><span class="irr">Cannot be undone once sent</span>1 message out<span class="ab p">Send</span></div>
+                <div class="qrow"><div class="ic">?</div><div><b>Vendor bill with no purchase order</b><small>Bill #7731, Keystone Fasteners, $3,180. Asking the buyer which PO it belongs to.</small></div><span class="pill amb">Missing data</span><div class="act"><button class="ab" data-go="inbox" type="button">Edit request</button></div></div>
+              </div>
             </div>
           </div>
 
@@ -336,15 +372,20 @@
                     <tr><td>Terms</td><td>Net 30</td><td>Net 30</td><td>Net 30</td></tr>
                   </tbody>
                 </table></div>
-                <div class="alert"><b>Invoice is $2,640 higher than the quote and the PO</b><span>Two of three records agree. The invoice price looks like an old price list entry. The customer will likely short-pay or dispute.</span></div>
-                <div class="box" style="margin-top:14px"><h4>How it was found</h4><ol><li>Read the invoice from QuickBooks (read-only).</li><li>Read the customer PO PDF from the email inbox.</li><li>Compared both to the quote in the orders sheet.</li><li>Two of three agree, so it drafted the fix and stopped.</li></ol></div>
+                <div class="alert"><b>Invoice is $2,640 higher than the quote and the PO</b><span>Two of three records agree. The invoice is the one that differs.</span></div>
+                <div class="box" style="margin-top:14px"><h4>How it was found</h4><ol><li>Read the invoice from QuickBooks.</li><li>Read the customer PO PDF from the email inbox.</li><li>Compared both to the quote in the orders sheet.</li><li>Two of three agree, so it drafted the fix and stopped.</li></ol></div>
               </div>
               <div>
                 <div class="box"><h4>Evidence</h4><p>Customer PO #88417, line 1, unit price $20.25. Received by email Sept 9. Attached to Q-2291 in the orders sheet.</p>
-                  <h4 style="margin-top:14px">Proposed fix (drafted, not applied)</h4><p>Credit memo for $2,640 against INV-5510, then reissue at $20.25. Needs your approval, because it changes QuickBooks.</p>
-                  <div class="act" style="flex-wrap:wrap;margin-top:12px"><span class="ab p">Approve credit memo</span><span class="ab">Keep invoice</span><span class="ab">Ask sales to confirm price</span></div></div>
-                <div class="box" style="margin-top:14px"><h4>Also checking</h4><p style="color:var(--soft)">The same price list entry appears on 2 other open invoices. Flagged for review, not changed.</p></div>
+                  <h4 style="margin-top:14px">Proposed fix (drafted, not applied) <span class="tier t-d" style="margin-left:6px"><i>&#9650;</i>Destructive</span></h4><p>Credit memo for $2,640 against INV-5510, then reissue at $20.25. It changes a posted invoice, so it asks every time.</p>
+                  <div class="act" style="flex-wrap:wrap;margin-top:12px"><span class="ab d">Review and confirm credit memo</span><span class="ab">Keep invoice</span><span class="ab">Ask sales to confirm price</span></div></div>
+                <div class="box" style="margin-top:14px"><h4>Also disagree</h4><p>Part 4410 costs $0 in the BOM sheet. The latest vendor invoice shows $1.86.</p><p style="color:var(--soft)">The same $21.35 price appears on 2 other open invoices. Flagged for review, not changed.</p></div>
               </div>
+            </div>
+            <div class="gaps">
+              <div class="box v"><h4>Verified</h4><p>Quote and customer PO both say $20.25. The invoice says $21.35. Quantity and terms match on all three.</p></div>
+              <div class="box a"><h4>Assumed</h4><p>The invoice price came from an old price list entry. The customer has not disputed it yet.</p></div>
+              <div class="box x"><h4>Could not do</h4><p>Confirm why the price changed. Sales must confirm. Check the 2 other invoices against their POs.</p></div>
             </div>
           </div>
 
@@ -360,42 +401,42 @@
           <!-- ACTIVITY -->
           <div class="scr" id="s-activity" role="tabpanel" hidden>
             <div class="scr-h"><div><h3>What it did, and what you decided</h3><p class="scr-sub">A running record so you can trust it, audit it, and show your accountant.</p></div><span class="sample">Sample data</span></div>
-            <div class="tbl log" style="margin-top:20px"><table>
-              <thead><tr><th>Time</th><th>Action</th><th>What happened</th><th>Where</th></tr></thead>
+            <div class="filters" role="group" aria-label="Filter the log"><button class="chip" type="button" data-f="all" aria-pressed="true">All</button><button class="chip" type="button" data-f="r" aria-pressed="false">Reads</button><button class="chip" type="button" data-f="w" aria-pressed="false">Writes</button><button class="chip" type="button" data-f="s" aria-pressed="false">Sent</button></div>
+            <div class="tbl log" style="margin-top:14px"><table>
+              <thead><tr><th>Time</th><th>Tier</th><th>What happened</th><th>Where</th><th>Undo</th></tr></thead>
               <tbody>
-                <tr><td>7:02 am</td><td><span class="pill mute">Read</span></td><td><b>Pulled 38 new bills and payments</b></td><td>QuickBooks Online</td></tr>
-                <tr><td>7:03 am</td><td><span class="pill mute">Read</span></td><td><b>Read 12 new emails with PDFs attached</b></td><td>Email inbox</td></tr>
-                <tr><td>7:05 am</td><td><span class="pill ok">Checked</span></td><td><b>Matched 41 documents across quotes, POs, bills</b></td><td>All sources</td></tr>
-                <tr><td>7:06 am</td><td><span class="pill bad">Found</span></td><td><b>INV-5510 price differs from PO #88417</b></td><td>QuickBooks + email</td></tr>
-                <tr><td>7:06 am</td><td><span class="pill bad">Found</span></td><td><b>Part 4410 cost is $0 in BOM sheet</b></td><td>Inventory sheet</td></tr>
-                <tr><td>7:08 am</td><td><span class="pill amb">Drafted</span></td><td><b>Credit memo and packing slip request</b></td><td>Review queue</td></tr>
-                <tr><td>8:41 am</td><td><span class="pill warn">You approved</span></td><td><b>Order row for Q-2304 added to orders sheet</b></td><td>Orders sheet</td></tr>
-                <tr><td>8:41 am</td><td><span class="pill mute">Undo available</span></td><td><b>Reverts the added row in one click</b></td><td>Orders sheet</td></tr>
-                <tr><td>8:55 am</td><td><span class="pill mute">You skipped</span></td><td><b>Resale certificate reminder, will handle by phone</b></td><td>Review queue</td></tr>
+                <tr data-k="r"><td>7:02 am</td><td><span class="tier t-r"><i>&#9679;</i>Read</span></td><td><b>Pulled 38 new bills and payments</b></td><td>QuickBooks Online</td><td>&mdash;</td></tr>
+                <tr data-k="r"><td>7:03 am</td><td><span class="tier t-r"><i>&#9679;</i>Read</span></td><td><b>Read 12 new emails with PDFs attached</b></td><td>Email inbox</td><td>&mdash;</td></tr>
+                <tr data-k="r"><td>7:05 am</td><td><span class="tier t-r"><i>&#9679;</i>Read</span></td><td><b>Matched 41 documents across quotes, POs, bills</b></td><td>All sources</td><td>&mdash;</td></tr>
+                <tr data-k="r"><td>7:06 am</td><td><span class="tier t-r"><i>&#9679;</i>Read</span></td><td><b>Found: INV-5510 price differs from PO #88417</b></td><td>QuickBooks + email</td><td>&mdash;</td></tr>
+                <tr data-k="r"><td>7:06 am</td><td><span class="tier t-r"><i>&#9679;</i>Read</span></td><td><b>Found: part 4410 cost is $0 in BOM sheet</b></td><td>Inventory sheet</td><td>&mdash;</td></tr>
+                <tr data-k="r"><td>7:08 am</td><td><span class="tier t-r"><i>&#9679;</i>Read</span></td><td><b>Drafted: credit memo and packing slip request</b></td><td>Review queue</td><td><button class="ab" type="button" data-undo="Discarded">Discard</button></td></tr>
+                <tr data-k="w"><td>8:41 am</td><td><span class="tier t-w"><i>&#9670;</i>Write</span></td><td><b>You approved: order row for Q-2301 added</b></td><td>Orders sheet</td><td><button class="ab" type="button" data-undo="Row removed">Undo</button></td></tr>
+                <tr data-k="s"><td>8:52 am</td><td><span class="tier t-w"><i>&#9670;</i>Write</span></td><td><b>You sent: delivery date question to Alder Steel</b></td><td>Email</td><td><span class="irr">No undo</span></td></tr>
+                <tr data-k="r"><td>8:55 am</td><td><span class="tier t-r"><i>&#9679;</i>Read</span></td><td><b>You skipped: late-payment note to Delta Tool, will call</b></td><td>Review queue</td><td><button class="ab" type="button" data-undo="Restored">Restore</button></td></tr>
               </tbody>
             </table></div>
             <div class="rules">
-              <div class="box"><h4>Rule 1</h4><p>Read-only on QuickBooks until you turn on changes.</p></div>
+              <div class="box"><h4>Rule 1</h4><p>Reads run without asking. Writes ask once per group. Changing a posted record asks every time.</p></div>
               <div class="box"><h4>Rule 2</h4><p>Every change shows evidence and waits for your approval.</p></div>
-              <div class="box"><h4>Rule 3</h4><p>Every action is logged with who, what, and where, and can be undone.</p></div>
+              <div class="box"><h4>Rule 3</h4><p>Every action is logged with who, what, and where. Undo works any time, except for sent messages.</p></div>
             </div>
           </div>
 
           <!-- CONNECTIONS -->
           <div class="scr" id="s-conn" role="tabpanel" hidden>
-            <div class="scr-h"><div><h3>What it connects to, and how</h3><p class="scr-sub">It starts read-only on QuickBooks plus one spreadsheet. Nothing else is required for a first pilot.</p></div><span class="sample">Sample data</span></div>
+            <div class="scr-h"><div><h3>What it connects to, and how</h3><p class="scr-sub">It starts with QuickBooks plus one spreadsheet. Nothing else is required for a first pilot.</p></div><span class="sample">Sample data</span></div>
             <div class="tbl conn" style="margin-top:20px"><table>
               <thead><tr><th>Source</th><th>How it connects</th><th>Access</th><th>When</th></tr></thead>
               <tbody>
-                <tr><td><b>QuickBooks Online</b></td><td>Official API, admin approves once</td><td><span class="pill ok">Read only</span></td><td><span class="pill ok">Pilot step 1</span></td></tr>
+                <tr><td><b>QuickBooks Online</b></td><td>Official API, admin approves once</td><td><span class="pill warn">Read, write with approval</span></td><td><span class="pill ok">Pilot step 1</span></td></tr>
                 <tr><td><b>Quotes and orders sheet</b></td><td>Google Sheets or Microsoft 365</td><td><span class="pill warn">Read and add rows</span></td><td><span class="pill ok">Pilot step 1</span></td></tr>
                 <tr><td><b>Inventory and BOM sheet</b></td><td>Google Sheets or Microsoft 365</td><td><span class="pill warn">Read, propose edits</span></td><td><span class="pill amb">Pilot step 2</span></td></tr>
                 <tr><td><b>Email inbox</b></td><td>Forwarding address or read access</td><td><span class="pill warn">Read, draft only</span></td><td><span class="pill amb">Pilot step 2</span></td></tr>
                 <tr><td><b>ERP, if you have one</b></td><td>Depends on the product</td><td><span class="pill mute">Decide later</span></td><td><span class="pill mute">Not assumed</span></td></tr>
-                <tr><td><b>QuickBooks changes</b></td><td>Same API, turned on later</td><td><span class="pill amb">Write with approval</span></td><td><span class="pill mute">After trust</span></td></tr>
               </tbody>
             </table></div>
-            <div class="box" style="margin-top:16px"><h4>First flow to prove</h4><p style="font-size:19px;font-weight:700;letter-spacing:-.02em">Purchase orders matched to vendor bills, with gaps drafted as requests.</p><p style="color:var(--soft)">One flow, read-only, one spreadsheet. If it saves real time, widen it.</p></div>
+            <div class="box" style="margin-top:16px"><h4>First flow to prove</h4><p style="font-size:19px;font-weight:700;letter-spacing:-.02em">Purchase orders matched to vendor bills, with gaps drafted as requests.</p><p style="color:var(--soft)">One flow, one spreadsheet. If it saves real time, widen it.</p></div>
           </div>
 
           <p class="foot-note">Concept mock-up. Fictional customers, vendors and amounts. Nothing here is real or sent.</p>
@@ -450,6 +491,7 @@
     mail.appendChild(el('pre', '', m.body));
     var act = el('div', 'act');
     m.btn.forEach(function(x, k){ act.appendChild(el('span', 'ab' + (k === 0 ? ' p' : ''), x)); });
+    act.appendChild(el('span', 'irr', 'Cannot be undone once sent'));
     mail.appendChild(act);
     var w = el('div', 'why'); w.appendChild(el('b', '', 'Why this matters. ')); w.appendChild(document.createTextNode(m.why)); mail.appendChild(w);
   }
@@ -461,6 +503,17 @@
     list.appendChild(b); litems.push(b);
   });
   showMail(0);
+  Array.prototype.forEach.call(document.querySelectorAll('[data-undo]'), function(b){
+    b.addEventListener('click', function(){ var t = b.getAttribute('data-undo'); var sp = el('span', 'pill ok', t); b.parentNode.replaceChild(sp, b); });
+  });
+  var fb = Array.prototype.slice.call(document.querySelectorAll('.filters .chip'));
+  fb.forEach(function(c){
+    c.addEventListener('click', function(){
+      var f = c.getAttribute('data-f');
+      fb.forEach(function(x){ x.setAttribute('aria-pressed', x === c ? 'true' : 'false'); });
+      Array.prototype.forEach.call(document.querySelectorAll('.log tbody tr'), function(r){ r.hidden = !(f === 'all' || r.getAttribute('data-k') === f); });
+    });
+  });
 })();
 </script>
 </body>
