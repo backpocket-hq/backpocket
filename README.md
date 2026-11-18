@@ -33,7 +33,8 @@ The `CNAME` file sets the Pages custom domain to `getbackpocketai.com`. Do not d
 
 ## Versions on the site
 
-- `/` is v9, the current page (copy of `/v2/`).
+- `/` is v10, the current page. Its positioning is "Enter it once. Know where every job stands," for electrical contractors who keep job costs and bids in spreadsheets.
+- `/v9/` is the previous homepage (the six-jobs page: receipts, pay apps, invoices, after-hours calls).
 - `/v2/` is v9 at its earlier address. Keep it so links already sent still work.
 - `/v1/` is the old v6 page. Kept for reference. Delete when Jon and Brad agree.
 
