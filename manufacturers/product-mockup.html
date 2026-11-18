@@ -1,0 +1,467 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Backpocket Back Office Mockup</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%231f4fd8'/%3E%3Cpath d='M35 7 17 35h13l-2 22 19-31H34z' fill='%23fff'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+  :root{
+    color-scheme:light;
+    --paper:#f5f8fc; --card:#ffffff; --ink:#0d2a4a; --soft:#4a6280; --faint:#566a80; --on-cobalt:#ffffff; --line:#d5dfeb;
+    --cobalt:#1f4fd8; --cobalt-tint:#e4ecfb; --rust:#b5452a; --rust-tint:#f8e6e0; --good:#2f7a4f; --good-tint:#e2f1e8;
+    --amber:#8a5200; --amber-tint:#fcefd3;
+    --deep:#0d2a4a; --on-deep:#e8f0fa; --on-deep-soft:#b9cbe0;
+    --grid:linear-gradient(rgba(31,79,216,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(31,79,216,.035) 1px,transparent 1px);
+    --disp:Inter,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;
+    --body:Inter,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;
+    --mono:'IBM Plex Mono',ui-monospace,Menlo,monospace;
+    --r-card:24px; --r-field:12px; --ease:cubic-bezier(.16,1,.3,1);
+  }
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      color-scheme:dark;
+      --paper:#0b1a2c; --card:#12263d; --ink:#e6eef8; --soft:#9db2ca; --faint:#7189a2; --line:#24405c;
+      --cobalt:#7fa2ff; --on-cobalt:#071326; --cobalt-tint:#172f55; --rust:#ee9a82; --rust-tint:#35201b; --good:#7bd6a2; --good-tint:#12301f;
+      --amber:#f0c274; --amber-tint:#3a2b0e;
+      --deep:#091524;
+      --grid:linear-gradient(rgba(127,162,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(127,162,255,.05) 1px,transparent 1px);
+    }
+  }
+  :root[data-theme="dark"]{
+    color-scheme:dark;
+    --paper:#0b1a2c; --card:#12263d; --ink:#e6eef8; --soft:#9db2ca; --faint:#7189a2; --line:#24405c;
+    --cobalt:#7fa2ff; --on-cobalt:#071326; --cobalt-tint:#172f55; --rust:#ee9a82; --rust-tint:#35201b; --good:#7bd6a2; --good-tint:#12301f;
+    --amber:#f0c274; --amber-tint:#3a2b0e;
+    --deep:#091524;
+    --grid:linear-gradient(rgba(127,162,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(127,162,255,.05) 1px,transparent 1px);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth;scroll-padding-top:84px;scrollbar-color:color-mix(in srgb,var(--faint) 55%,transparent) transparent}
+  body{margin:0;background-color:var(--paper);background-image:var(--grid);background-size:28px 28px;color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.6}
+  h1,h2,h3{font-family:var(--disp);font-weight:800;letter-spacing:-.035em;text-wrap:balance;margin:0}
+  h2{font-size:clamp(32px,4.2vw,52px);line-height:1.04}
+  h3{font-weight:700}
+  a{color:inherit;text-underline-offset:.2em}
+  ::selection{background:var(--cobalt);color:var(--on-cobalt)}
+  input,textarea,select{caret-color:var(--cobalt);accent-color:var(--cobalt)}
+  ::placeholder{color:var(--faint);opacity:1}
+  .skip{position:absolute;left:-9999px;top:12px}
+  .skip:focus{left:16px;z-index:50;background:var(--ink);color:var(--paper);padding:10px 18px;border-radius:999px;font-weight:600;text-decoration:none}
+  :focus-visible{outline:3px solid var(--cobalt);outline-offset:3px}
+  .wrap{max-width:1180px;margin:0 auto;padding-inline:24px}
+  section{padding-block:100px}
+  .lede{color:var(--soft);font-size:19px;max-width:56ch;margin:16px 0 0}
+
+  .btn{display:inline-flex;align-items:center;justify-content:center;min-height:54px;padding:0 30px;font:600 16px var(--body);text-decoration:none;border:0;border-radius:999px;background:var(--cobalt);color:var(--on-cobalt);cursor:pointer;white-space:nowrap;box-shadow:0 14px 30px -12px rgba(31,79,216,.6);transition:transform .2s var(--ease),filter .2s}
+  .btn:hover{transform:translateY(-2px);filter:brightness(1.06)}
+  .btn:active{transform:translateY(0) scale(.98)}
+  .btn.sm{min-height:44px;padding:0 22px;font-size:14.5px}
+  .cta-short{display:none}
+
+  .bar{position:sticky;top:0;z-index:30;background:var(--card);border-bottom:1px solid var(--line)}
+  .bar .wrap{display:flex;align-items:center;gap:32px;min-height:68px}
+  .logo{display:flex;align-items:center;gap:9px;font-weight:800;font-size:21px;letter-spacing:-.03em;text-decoration:none;color:var(--ink)}
+  .logo i{width:11px;height:11px;background:var(--cobalt);transform:rotate(45deg);display:inline-block}
+  .bar nav{display:flex;gap:30px;font-size:15px;margin-left:auto}
+  .bar nav a{color:var(--soft);text-decoration:none;padding:6px 0;transition:color .2s}
+  .bar nav a:hover{color:var(--ink)}
+
+  /* hero */
+  .hero{position:relative;isolation:isolate;min-height:calc(min(100dvh,860px) - 68px);display:flex;align-items:flex-end;color:#fff;overflow:hidden;padding:0}
+  .hero .bg{position:absolute;inset:0;z-index:-2}
+  .hero .bg img{width:100%;height:100%;object-fit:cover;object-position:50% 58%}
+  .hero::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(6,16,30,.92) 0%,rgba(6,16,30,.74) 48%,rgba(6,16,30,.3) 100%),linear-gradient(0deg,rgba(6,16,30,.6),transparent 45%)}
+  .hero-in{width:100%;padding-block:84px 120px}
+  .hero h1{font-size:clamp(38px,4.7vw,68px);line-height:1;letter-spacing:-.04em;max-width:20ch;color:#fff}
+  .hero .lede{color:#d3e0ee;max-width:42ch;font-size:20px}
+  .ticker{display:inline-flex;align-items:center;gap:12px;margin-top:26px;padding:8px 18px 8px 8px;border-radius:999px;background:rgba(7,19,36,.58);border:1px solid rgba(255,255,255,.26);font-size:15px;color:#fff;max-width:100%}
+  .ticker b{font:600 12px var(--body);letter-spacing:.05em;text-transform:uppercase;padding:5px 10px;border-radius:999px;background:rgba(255,255,255,.18);color:#fff;flex:none}
+  .ticker span{transition:opacity .35s var(--ease),transform .35s var(--ease);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .ticker.swap span{opacity:0;transform:translateY(6px)}
+  .hero .cta-row{margin-top:30px;display:flex;flex-wrap:wrap;gap:14px;align-items:center}
+  .hero .cta-note{color:#d3e0ee;font-size:15px}
+
+  /* statement sheet */
+  .sheet{position:relative;z-index:1;margin-top:-64px;border-radius:40px 40px 0 0;background-color:var(--paper);background-image:var(--grid);background-size:28px 28px;padding-block:104px 20px}
+  .statement{margin:0;font-size:clamp(30px,4.4vw,60px);line-height:1.1;letter-spacing:-.04em;font-weight:700;max-width:24ch}
+  .statement .dim{color:var(--faint)}
+  .statement .inl{display:inline-block;padding:0 .3em .06em;border-radius:999px;background:var(--cobalt-tint);color:var(--cobalt)}
+  .early{margin:36px 0 0;color:var(--soft);max-width:60ch}
+
+  /* jobs */
+  #jobs h2{max-width:16ch}
+  .jobs{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:20px;margin-top:56px}
+  .job{grid-column:span 2;display:flex;flex-direction:column;gap:14px;min-height:380px;padding:30px;border-radius:var(--r-card);background:color-mix(in srgb,var(--cobalt) 5%,var(--card));border:1px solid var(--line);transition:transform .35s var(--ease),box-shadow .35s var(--ease)}
+  .job:nth-child(n+4){grid-column:span 3}
+  .job .n{font:600 13px var(--mono);color:var(--cobalt);letter-spacing:.04em}
+  .job h3{font-size:26px;line-height:1.1}
+  .job > p{margin:0;color:var(--soft);font-size:16.5px}
+  .mini{margin-top:auto;display:flex;flex-direction:column}
+  .mrow{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 0;border-top:1px solid color-mix(in srgb,var(--ink) 13%,transparent);font-size:14.5px}
+  .mrow b{display:block;font-weight:600;line-height:1.3}
+  .mrow small{display:block;font-size:13px;color:var(--soft)}
+  .pill{font:600 12px var(--body);letter-spacing:.01em;padding:4px 10px;border-radius:999px;white-space:nowrap;flex:none}
+  .pill.ok{background:var(--good-tint);color:var(--good)}
+  .pill.warn{background:var(--cobalt-tint);color:var(--cobalt)}
+  .pill.bad{background:var(--rust-tint);color:var(--rust)}
+  .pill.amb{background:var(--amber-tint);color:var(--amber)}
+  .pill.mute{background:color-mix(in srgb,var(--ink) 8%,transparent);color:var(--soft)}
+  @media (hover:hover){.job:hover{transform:translateY(-4px);box-shadow:0 30px 60px -28px rgba(31,79,216,.4)}}
+
+  /* product mockup */
+  #product h2{max-width:18ch}
+  .app{margin-top:44px;display:grid;grid-template-columns:230px minmax(0,1fr);border:1px solid var(--line);border-radius:var(--r-card);overflow:hidden;background:var(--paper);box-shadow:0 40px 80px -40px rgba(13,42,74,.5)}
+  .side{background:var(--deep);color:var(--on-deep);padding:22px 14px;display:flex;flex-direction:column;gap:4px}
+  .side .co{padding:0 10px 16px}
+  .side .co b{display:block;font-size:19px;font-weight:800;letter-spacing:-.02em;color:#fff}
+  .side .co small{color:var(--on-deep-soft);font-size:13px}
+  .side button{display:flex;align-items:center;justify-content:space-between;gap:8px;width:100%;min-height:44px;padding:0 12px;border:0;border-radius:12px;background:transparent;color:var(--on-deep);font:500 15.5px var(--body);text-align:left;cursor:pointer;transition:background .2s}
+  .side button:hover{background:rgba(255,255,255,.08)}
+  .side button[aria-selected="true"]{background:#2b5be6;color:#fff;font-weight:700}
+  .side button i{font:600 11.5px var(--body);font-style:normal;min-width:22px;height:22px;padding:0 6px;border-radius:999px;background:rgba(255,255,255,.14);display:inline-flex;align-items:center;justify-content:center}
+  .side .src{margin-top:auto;padding:18px 10px 0;display:flex;flex-direction:column;gap:6px;font-size:12.5px;color:var(--on-deep-soft)}
+  .side .src span:before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:#3fbf7a;margin-right:8px}
+  .main{padding:30px 32px 22px;min-width:0;min-height:640px;display:flex;flex-direction:column}
+  .scr[hidden]{display:none}
+  .scr{animation:rise .4s var(--ease) both;flex:1}
+  @keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+  .scr-h{display:flex;justify-content:space-between;align-items:flex-start;gap:16px}
+  .scr-h h3{font-size:clamp(24px,2.8vw,34px);line-height:1.08;letter-spacing:-.035em}
+  .scr-sub{margin:8px 0 0;color:var(--soft);font-size:16px;max-width:60ch}
+  .sample{font:700 11px var(--body);letter-spacing:.08em;text-transform:uppercase;padding:5px 11px;border-radius:999px;background:var(--amber-tint);color:var(--amber);white-space:nowrap;flex:none}
+  .stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:22px}
+  .stat{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px 16px}
+  .stat b{display:block;font-size:34px;line-height:1.1;font-weight:800;letter-spacing:-.03em}
+  .stat span{font-size:13.5px;color:var(--soft);line-height:1.3;display:block}
+  .stat.c1 b{color:var(--cobalt)} .stat.c2 b{color:var(--amber)} .stat.c3 b{color:var(--rust)} .stat.c4 b{color:var(--good)}
+  .qcard{margin-top:16px;background:var(--card);border:1px solid var(--line);border-radius:20px;overflow:hidden}
+  .qh{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:14px 20px;border-bottom:1px solid var(--line);font-weight:700}
+  .qh span{font-weight:400;color:var(--soft);font-size:14px}
+  .qrow{display:grid;grid-template-columns:40px minmax(0,1fr) auto auto;gap:14px;align-items:center;padding:13px 20px;border-top:1px solid var(--line)}
+  .qrow:first-of-type{border-top:0}
+  .ic{width:40px;height:40px;border-radius:11px;background:var(--cobalt-tint);color:var(--cobalt);display:flex;align-items:center;justify-content:center;font:700 13px var(--body)}
+  .qrow b{display:block;font-size:15.5px;line-height:1.3}
+  .qrow small{display:block;color:var(--soft);font-size:13.5px;line-height:1.35}
+  .act{display:flex;gap:8px}
+  .ab{display:inline-flex;align-items:center;min-height:36px;padding:0 15px;border-radius:999px;font:600 13.5px var(--body);border:1.5px solid var(--line);background:var(--card);color:var(--ink);cursor:default}
+  .ab.p{background:var(--cobalt);border-color:var(--cobalt);color:var(--on-cobalt)}
+  button.ab{cursor:pointer}
+  .cols{display:grid;grid-template-columns:minmax(0,1.8fr) minmax(0,1fr);gap:16px;margin-top:20px}
+  .box{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px 20px}
+  .box h4{margin:0 0 8px;font:700 12px var(--body);letter-spacing:.08em;text-transform:uppercase;color:var(--faint)}
+  .box p{margin:0 0 10px;font-size:15px;color:var(--ink)}
+  .box p:last-child{margin-bottom:0}
+  .box ol{margin:0;padding-left:20px;font-size:15px;color:var(--ink)}
+  .tbl{overflow-x:auto;border:1px solid var(--line);border-radius:18px;background:var(--card)}
+  table{width:100%;border-collapse:collapse;font-size:14.5px;min-width:520px}
+  th{padding:11px 14px;text-align:left;font:700 13px var(--body);background:var(--deep);color:#fff;white-space:nowrap}
+  th.g{background:#1f8a57} th.b{background:#2b5be6} th.n{background:#5d6d80}
+  td{padding:10px 14px;border-top:1px solid var(--line);white-space:nowrap}
+  td.hi{background:var(--rust-tint);color:var(--rust);font-weight:700}
+  td.num{font-variant-numeric:tabular-nums}
+  .alert{margin-top:14px;padding:16px 20px;border-radius:18px;background:var(--rust-tint);border:1px solid color-mix(in srgb,var(--rust) 35%,transparent)}
+  .alert b{display:block;color:var(--rust);font-size:18px;letter-spacing:-.02em}
+  .alert span{font-size:15px;color:var(--ink)}
+  .split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:16px;margin-top:20px;align-items:start}
+  .lst{display:flex;flex-direction:column;gap:8px}
+  .li{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:12px 16px;display:flex;justify-content:space-between;gap:10px;align-items:flex-start;cursor:pointer;text-align:left;font:inherit;color:inherit;width:100%}
+  .li[aria-pressed="true"]{border-color:var(--cobalt);background:color-mix(in srgb,var(--cobalt) 6%,var(--card))}
+  .li b{display:block;font-size:15px;line-height:1.3}
+  .li small{display:block;font-size:13px;color:var(--soft);margin-top:2px}
+  .mail{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px 20px}
+  .mail h4{margin:0 0 8px;font:700 12px var(--body);letter-spacing:.08em;text-transform:uppercase;color:var(--faint)}
+  .mail .hd{font-size:13.5px;color:var(--soft);line-height:1.5}
+  .mail pre{white-space:pre-wrap;font:400 15px var(--body);margin:12px 0 14px;color:var(--ink)}
+  .mail .why{margin-top:14px;padding-top:12px;border-top:1px dashed var(--line);font-size:14px;color:var(--soft)}
+  .log td:first-child{color:var(--soft);font-variant-numeric:tabular-nums}
+  .rules{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:16px}
+  .rules .box h4{margin-bottom:6px}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+  .chip{min-height:40px;padding:0 16px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--soft);font:600 14px var(--body);cursor:pointer;text-align:left}
+  .chip:hover{color:var(--ink);border-color:var(--soft)}
+  .chip[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+  .askbox{margin-top:16px;display:flex;gap:8px;align-items:center;border:1px solid var(--line);background:var(--card);border-radius:999px;padding:6px 6px 6px 18px;color:var(--faint);font-size:15px}
+  .askbox span{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .askbox i{width:36px;height:36px;border-radius:50%;background:var(--cobalt);color:var(--on-cobalt);display:flex;align-items:center;justify-content:center;font-style:normal;flex:none}
+  .ans{margin-top:16px;background:var(--card);border:1px solid var(--line);border-radius:20px;padding:20px 22px}
+  .ans .q{font:600 13px var(--body);color:var(--cobalt);margin:0 0 6px;letter-spacing:.02em}
+  .ans h4{margin:0 0 6px;font-size:21px;letter-spacing:-.025em;line-height:1.2}
+  .ans .sum{margin:0 0 14px;color:var(--soft);font-size:15.5px}
+  .ans .mrow{padding:10px 0}
+  .ans .need{margin-top:14px;padding:12px 16px;border-radius:14px;background:var(--cobalt-tint);color:var(--ink);font-size:14.5px;display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap}
+  .foot-note{margin:18px 0 0;font-size:13px;color:var(--faint)}
+  .conn td small{color:var(--soft)}
+
+  /* stays the same */
+  .trust-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:64px;align-items:start}
+  .trust-grid .sticky{position:sticky;top:110px}
+  .trust-grid h2{max-width:11ch}
+  .trows{display:flex;flex-direction:column}
+  .trow{padding:26px 0}
+  .trow + .trow{border-top:1px solid var(--line)}
+  .trow h3{font-size:22px;letter-spacing:-.02em;margin-bottom:6px}
+  .trow p{margin:0;color:var(--soft)}
+
+  /* pilot */
+  .pgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:36px;margin-top:48px}
+  .pstep{border-top:2px solid var(--ink);padding-top:20px}
+  .pstep h3{font-size:21px;line-height:1.15;letter-spacing:-.02em;margin:0 0 8px}
+  .pstep p{margin:0;color:var(--soft);font-size:16px}
+  .pfacts{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
+  .pfacts span{padding:8px 16px;border-radius:999px;background:var(--cobalt-tint);color:var(--cobalt);font-weight:600;font-size:15px}
+
+  /* start */
+  .start{background:var(--deep);color:var(--on-deep);border-radius:40px 40px 0 0}
+  .start h2{color:#fff}
+  .start .lede{color:var(--on-deep-soft)}
+  .s-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:56px;align-items:start}
+  .form{background:var(--card);color:var(--ink);padding:28px;border-radius:var(--r-card);box-shadow:0 30px 70px rgba(0,0,0,.28)}
+  label{display:block;font-weight:600;font-size:15px;margin-bottom:6px}
+  textarea,input,select{width:100%;font:400 16px var(--body);color:var(--ink);background:var(--card);border:1.5px solid var(--line);border-radius:var(--r-field);padding:12px 14px}
+  textarea{min-height:100px;resize:vertical;line-height:1.5}
+  textarea:focus,input:focus,select:focus{border-color:var(--cobalt)}
+  .form .field{margin-bottom:14px}
+  .form .two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .promise{font-size:14.5px;color:var(--soft);margin:14px 0 0}
+  .sent{margin-top:16px;border:1.5px dashed var(--good);background:var(--good-tint);border-radius:var(--r-field);padding:14px 16px;font-size:14.5px}
+  .sent pre{white-space:pre-wrap;font:400 13.5px var(--mono);margin:8px 0 0;color:var(--ink)}
+  .foot{background:var(--deep);color:var(--on-deep-soft);padding-block:30px;font-size:14px;display:flex;justify-content:center}
+  [hidden]{display:none!important}
+  .err{margin:12px 0 0;color:var(--rust);font-size:14.5px}
+
+  html.rv .reveal:not(.in){opacity:0;transform:translateY(22px)}
+  .reveal{transition:opacity .7s var(--ease),transform .7s var(--ease);transition-delay:calc(var(--i,0) * 70ms)}
+  .job.reveal.in{transition:opacity .7s var(--ease),transform .35s var(--ease),box-shadow .35s var(--ease);transition-delay:0s}
+
+  @media (max-width:980px){
+    section{padding-block:72px}
+    .jobs{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .job,.job:nth-child(n+4){grid-column:span 1}
+    .job:last-child{grid-column:span 2}
+    .s-grid,.trust-grid{grid-template-columns:1fr}
+    .trust-grid .sticky{position:static}
+    .trust-grid{gap:28px}
+    .pgrid{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .bar nav{display:none}
+    .bar .btn{margin-left:auto}
+    .app{grid-template-columns:1fr}
+    .side{flex-direction:row;overflow-x:auto;padding:12px;gap:6px;align-items:center}
+    .side .co,.side .src{display:none}
+    .side button{width:auto;white-space:nowrap;flex:none;gap:10px}
+    .main{padding:24px 20px 18px;min-height:0}
+    .cols,.split{grid-template-columns:1fr}
+  }
+  @media (max-width:700px){
+    .hero-in{padding-block:56px 96px}
+    .hero::before{background:linear-gradient(180deg,rgba(6,16,30,.82) 0%,rgba(6,16,30,.9) 100%)}
+    .jobs{grid-template-columns:1fr}
+    .job,.job:nth-child(n+4),.job:last-child{grid-column:span 1;min-height:0}
+    .pgrid,.form .two,.rules{grid-template-columns:1fr}
+    .stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .qrow{grid-template-columns:36px minmax(0,1fr)}
+    .qrow .pill{grid-column:2;justify-self:start}
+    .qrow .act{grid-column:2}
+    .scr-h{flex-direction:column}
+    .sheet{border-radius:28px 28px 0 0;padding-top:72px}
+    .start{border-radius:28px 28px 0 0}
+    .cta-long{display:none}
+    .cta-short{display:inline}
+  }
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    .reveal,.job,.btn,.ticker span{transition:none}
+    .scr{animation:none}
+    html.rv .reveal:not(.in){opacity:1;transform:none}
+  }
+
+  body{padding-block:24px 40px}
+  .page{max-width:1180px;margin:0 auto;padding-inline:max(16px,env(safe-area-inset-left,0px))}
+  .top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+  .top p{margin:0;color:var(--soft);font-size:15px}
+  .app{margin-top:18px}
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="top"><a class="logo" href="#"><i></i>Backpocket</a><p>Product concept for small manufacturers. Click through the screens.</p></div>
+  <div class="app">
+        <div class="side" role="tablist" aria-label="Product screens" aria-orientation="vertical">
+          <div class="co"><b>Back Office</b><small>Harbor Fabrication</small></div>
+          <button role="tab" aria-selected="true" data-go="home">Home</button>
+          <button role="tab" aria-selected="false" data-go="drift">Drift <i>3</i></button>
+          <button role="tab" aria-selected="false" data-go="inbox">Inbox <i>9</i></button>
+          <button role="tab" aria-selected="false" data-go="activity">Activity</button>
+          <button role="tab" aria-selected="false" data-go="conn">Connections</button>
+          <div class="src"><span>QuickBooks Online (read-only)</span><span>Quotes and orders sheet</span><span>Inventory and BOM sheet</span><span>Email inbox</span></div>
+        </div>
+
+        <div class="main">
+          <!-- HOME -->
+          <div class="scr" id="s-home" role="tabpanel">
+            <div class="scr-h"><div><h3>What it found, drafted, and needs from you</h3><p class="scr-sub">Overnight, the system read your sources, checked them, and drafted the fixes.</p></div><span class="sample">Sample data</span></div>
+            <div class="stats">
+              <div class="stat c1"><b>6</b><span>Waiting for your approval</span></div>
+              <div class="stat c2"><b>9</b><span>Gaps found, requests drafted</span></div>
+              <div class="stat c3"><b>3</b><span>Records that disagree</span></div>
+              <div class="stat c4"><b>41</b><span>Checked and clean this week</span></div>
+            </div>
+            <div class="qcard">
+              <div class="qh">Approval queue <span>Nothing changes or goes out until you click.</span></div>
+              <div class="qrow"><div class="ic">$</div><div><b>Invoice INV-5510 does not match the customer PO</b><small>Billed $51,240. Customer PO #88417 says $48,600. Credit memo drafted.</small></div><span class="pill bad">Drift</span><div class="act"><button class="ab" data-go="drift" type="button">Review</button><span class="ab p">Approve</span></div></div>
+              <div class="qrow"><div class="ic">PO</div><div><b>Receive PO-1187 against vendor bill</b><small>Bill from Alder Steel Supply matches the PO. Ready to enter in QuickBooks.</small></div><span class="pill ok">Match found</span><div class="act"><span class="ab">Review</span><span class="ab p">Approve</span></div></div>
+              <div class="qrow"><div class="ic">?</div><div><b>Vendor bill with no purchase order</b><small>Bill #7731, Keystone Fasteners, $3,180. Asking the buyer which PO it belongs to.</small></div><span class="pill amb">Missing data</span><div class="act"><button class="ab" data-go="inbox" type="button">Edit request</button><span class="ab p">Send</span></div></div>
+              <div class="qrow"><div class="ic">Q</div><div><b>Quote Q-2304 accepted, no order entered</b><small>Customer replied yes by email Tuesday. Order row and BOM draft ready.</small></div><span class="pill warn">New order</span><div class="act"><span class="ab">Review</span><span class="ab p">Approve</span></div></div>
+              <div class="qrow"><div class="ic">#</div><div><b>Part 4410 cost is $0 in the BOM sheet</b><small>Latest vendor invoice shows $1.86 each. Update proposed. Margin on 3 open quotes changes.</small></div><span class="pill bad">Drift</span><div class="act"><span class="ab">Review</span><span class="ab p">Approve</span></div></div>
+            </div>
+          </div>
+
+          <!-- DRIFT -->
+          <div class="scr" id="s-drift" role="tabpanel" hidden>
+            <div class="scr-h"><div><h3>Quote, order and invoice disagree</h3><p class="scr-sub">The system compares the same fact across your sources and shows the evidence.</p></div><span class="sample">Sample data</span></div>
+            <div class="cols">
+              <div>
+                <div class="tbl"><table>
+                  <thead><tr><th class="n">Field</th><th class="g">Quote (orders sheet)</th><th class="b">Customer PO (email PDF)</th><th class="n">Invoice (QuickBooks)</th></tr></thead>
+                  <tbody>
+                    <tr><td>Document</td><td>Q-2291</td><td>PO #88417</td><td>INV-5510</td></tr>
+                    <tr><td>Customer</td><td>Prairie Hardware</td><td>Prairie Hardware</td><td>Prairie Hardware</td></tr>
+                    <tr><td>Quantity</td><td class="num">2,400</td><td class="num">2,400</td><td class="num">2,400</td></tr>
+                    <tr><td>Unit price</td><td class="num">$20.25</td><td class="num">$20.25</td><td class="hi num">$21.35</td></tr>
+                    <tr><td>Total</td><td class="num">$48,600</td><td class="num">$48,600</td><td class="hi num">$51,240</td></tr>
+                    <tr><td>Terms</td><td>Net 30</td><td>Net 30</td><td>Net 30</td></tr>
+                  </tbody>
+                </table></div>
+                <div class="alert"><b>Invoice is $2,640 higher than the quote and the PO</b><span>Two of three records agree. The invoice price looks like an old price list entry. The customer will likely short-pay or dispute.</span></div>
+                <div class="box" style="margin-top:14px"><h4>How it was found</h4><ol><li>Read the invoice from QuickBooks (read-only).</li><li>Read the customer PO PDF from the email inbox.</li><li>Compared both to the quote in the orders sheet.</li><li>Two of three agree, so it drafted the fix and stopped.</li></ol></div>
+              </div>
+              <div>
+                <div class="box"><h4>Evidence</h4><p>Customer PO #88417, line 1, unit price $20.25. Received by email Sept 9. Attached to Q-2291 in the orders sheet.</p>
+                  <h4 style="margin-top:14px">Proposed fix (drafted, not applied)</h4><p>Credit memo for $2,640 against INV-5510, then reissue at $20.25. Needs your approval, because it changes QuickBooks.</p>
+                  <div class="act" style="flex-wrap:wrap;margin-top:12px"><span class="ab p">Approve credit memo</span><span class="ab">Keep invoice</span><span class="ab">Ask sales to confirm price</span></div></div>
+                <div class="box" style="margin-top:14px"><h4>Also checking</h4><p style="color:var(--soft)">The same price list entry appears on 2 other open invoices. Flagged for review, not changed.</p></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- INBOX -->
+          <div class="scr" id="s-inbox" role="tabpanel" hidden>
+            <div class="scr-h"><div><h3>Missing information, requests already drafted</h3><p class="scr-sub">Gaps become tasks with the message written. A person sends each one.</p></div><span class="sample">Sample data</span></div>
+            <div class="split">
+              <div class="lst" id="inboxList"></div>
+              <div class="mail" id="mail" aria-live="polite"></div>
+            </div>
+          </div>
+
+          <!-- ACTIVITY -->
+          <div class="scr" id="s-activity" role="tabpanel" hidden>
+            <div class="scr-h"><div><h3>What it did, and what you decided</h3><p class="scr-sub">A running record so you can trust it, audit it, and show your accountant.</p></div><span class="sample">Sample data</span></div>
+            <div class="tbl log" style="margin-top:20px"><table>
+              <thead><tr><th>Time</th><th>Action</th><th>What happened</th><th>Where</th></tr></thead>
+              <tbody>
+                <tr><td>7:02 am</td><td><span class="pill mute">Read</span></td><td><b>Pulled 38 new bills and payments</b></td><td>QuickBooks Online</td></tr>
+                <tr><td>7:03 am</td><td><span class="pill mute">Read</span></td><td><b>Read 12 new emails with PDFs attached</b></td><td>Email inbox</td></tr>
+                <tr><td>7:05 am</td><td><span class="pill ok">Checked</span></td><td><b>Matched 41 documents across quotes, POs, bills</b></td><td>All sources</td></tr>
+                <tr><td>7:06 am</td><td><span class="pill bad">Found</span></td><td><b>INV-5510 price differs from PO #88417</b></td><td>QuickBooks + email</td></tr>
+                <tr><td>7:06 am</td><td><span class="pill bad">Found</span></td><td><b>Part 4410 cost is $0 in BOM sheet</b></td><td>Inventory sheet</td></tr>
+                <tr><td>7:08 am</td><td><span class="pill amb">Drafted</span></td><td><b>Credit memo and packing slip request</b></td><td>Review queue</td></tr>
+                <tr><td>8:41 am</td><td><span class="pill warn">You approved</span></td><td><b>Order row for Q-2304 added to orders sheet</b></td><td>Orders sheet</td></tr>
+                <tr><td>8:41 am</td><td><span class="pill mute">Undo available</span></td><td><b>Reverts the added row in one click</b></td><td>Orders sheet</td></tr>
+                <tr><td>8:55 am</td><td><span class="pill mute">You skipped</span></td><td><b>Resale certificate reminder, will handle by phone</b></td><td>Review queue</td></tr>
+              </tbody>
+            </table></div>
+            <div class="rules">
+              <div class="box"><h4>Rule 1</h4><p>Read-only on QuickBooks until you turn on changes.</p></div>
+              <div class="box"><h4>Rule 2</h4><p>Every change shows evidence and waits for your approval.</p></div>
+              <div class="box"><h4>Rule 3</h4><p>Every action is logged with who, what, and where, and can be undone.</p></div>
+            </div>
+          </div>
+
+          <!-- CONNECTIONS -->
+          <div class="scr" id="s-conn" role="tabpanel" hidden>
+            <div class="scr-h"><div><h3>What it connects to, and how</h3><p class="scr-sub">It starts read-only on QuickBooks plus one spreadsheet. Nothing else is required for a first pilot.</p></div><span class="sample">Sample data</span></div>
+            <div class="tbl conn" style="margin-top:20px"><table>
+              <thead><tr><th>Source</th><th>How it connects</th><th>Access</th><th>When</th></tr></thead>
+              <tbody>
+                <tr><td><b>QuickBooks Online</b></td><td>Official API, admin approves once</td><td><span class="pill ok">Read only</span></td><td><span class="pill ok">Pilot step 1</span></td></tr>
+                <tr><td><b>Quotes and orders sheet</b></td><td>Google Sheets or Microsoft 365</td><td><span class="pill warn">Read and add rows</span></td><td><span class="pill ok">Pilot step 1</span></td></tr>
+                <tr><td><b>Inventory and BOM sheet</b></td><td>Google Sheets or Microsoft 365</td><td><span class="pill warn">Read, propose edits</span></td><td><span class="pill amb">Pilot step 2</span></td></tr>
+                <tr><td><b>Email inbox</b></td><td>Forwarding address or read access</td><td><span class="pill warn">Read, draft only</span></td><td><span class="pill amb">Pilot step 2</span></td></tr>
+                <tr><td><b>ERP, if you have one</b></td><td>Depends on the product</td><td><span class="pill mute">Decide later</span></td><td><span class="pill mute">Not assumed</span></td></tr>
+                <tr><td><b>QuickBooks changes</b></td><td>Same API, turned on later</td><td><span class="pill amb">Write with approval</span></td><td><span class="pill mute">After trust</span></td></tr>
+              </tbody>
+            </table></div>
+            <div class="box" style="margin-top:16px"><h4>First flow to prove</h4><p style="font-size:19px;font-weight:700;letter-spacing:-.02em">Purchase orders matched to vendor bills, with gaps drafted as requests.</p><p style="color:var(--soft)">One flow, read-only, one spreadsheet. If it saves real time, widen it.</p></div>
+          </div>
+
+          <p class="foot-note">Concept mock-up. Fictional customers, vendors and amounts. Nothing here is real or sent.</p>
+        </div>
+      </div>
+</div>
+<script>
+(function(){
+  var $ = function(id){ return document.getElementById(id); };
+  function el(tag, cls, txt){ var e = document.createElement(tag); if (cls) e.className = cls; if (txt != null) e.textContent = txt; return e; }
+  var tabs = Array.prototype.slice.call(document.querySelectorAll('.side [role="tab"]'));
+  var ids = ['home','drift','inbox','activity','conn'];
+  function go(id){
+    ids.forEach(function(k){ $('s-' + k).hidden = (k !== id); });
+    tabs.forEach(function(t){
+      var on = t.getAttribute('data-go') === id;
+      t.setAttribute('aria-selected', on ? 'true' : 'false'); t.tabIndex = on ? 0 : -1;
+    });
+  }
+  tabs.forEach(function(t, i){
+    t.addEventListener('click', function(){ go(t.getAttribute('data-go')); });
+    t.addEventListener('keydown', function(e){
+      var d = (e.key === 'ArrowDown' || e.key === 'ArrowRight') ? 1 : (e.key === 'ArrowUp' || e.key === 'ArrowLeft') ? -1 : 0;
+      if (!d) return;
+      e.preventDefault();
+      var k = (i + d + tabs.length) % tabs.length; go(tabs[k].getAttribute('data-go')); tabs[k].focus();
+    });
+    if (i) t.tabIndex = -1;
+  });
+  Array.prototype.forEach.call(document.querySelectorAll('.main [data-go]'), function(b){
+    b.addEventListener('click', function(){ go(b.getAttribute('data-go')); });
+  });
+  var INBOX = [
+    {t:'Packing slip missing, PO-1187', d:'Alder Steel Supply shipped Oct 28. No receiving record.', tag:'Draft ready', cls:'amb', to:'orders@aldersteel.example', subj:'Packing slip for PO-1187',
+     body:'Hello,\n\nCan you send the packing slip or delivery receipt for PO-1187, shipped October 28? We have the invoice but no matching delivery record and want to close it out.\n\nThank you,\nAccounts Payable', why:'Without the slip, the bill cannot be matched to the PO, so cost is not booked to the right job.', btn:['Send as me','Edit','Skip']},
+    {t:'Bill #7731 has no purchase order', d:'Keystone Fasteners, $3,180.', tag:'Draft ready', cls:'amb', to:'buyer@harborfab.example', subj:'Which PO is bill #7731 for?',
+     body:'Hi,\n\nKeystone Fasteners billed $3,180 on bill #7731. I cannot find a purchase order for it. Which PO does it belong to?\n\nThank you,\nAccounts Payable', why:'An unmatched bill is paid without a check, or it sits unpaid and damages the vendor relationship.', btn:['Send as me','Edit','Skip']},
+    {t:'Resale certificate expired', d:'Prairie Hardware. Expired Oct 31.', tag:'Draft ready', cls:'amb', to:'ap@prairiehardware.example', subj:'Updated resale certificate',
+     body:'Hello,\n\nYour resale certificate on file expired October 31. Can you send an updated copy so we can keep your orders tax exempt?\n\nThank you,\nAccounts Receivable', why:'Without a valid certificate, sales tax can become due on past orders.', btn:['Send as me','Edit','Skip']},
+    {t:'Part 4410 has no vendor lead time', d:'Needed to quote 3 open requests.', tag:'Ask buyer', cls:'warn', to:'buyer@harborfab.example', subj:'Lead time for part 4410',
+     body:'Hi,\n\nI need the current vendor lead time for part 4410 to price 3 open quotes. Can you confirm it with Alder Steel?\n\nThank you,\nOperations', why:'Quotes priced without a lead time can promise dates you cannot meet.', btn:['Send as me','Edit','Skip']},
+    {t:'Quote Q-2299 has no ship-to address', d:'Customer replied but did not include it.', tag:'Draft ready', cls:'amb', to:'orders@customer.example', subj:'Ship-to address for Q-2299',
+     body:'Hello,\n\nThank you for accepting quote Q-2299. Can you send the ship-to address so we can enter the order?\n\nThank you,\nSales Operations', why:'No address means no freight quote and a delayed order.', btn:['Send as me','Edit','Skip']}
+  ];
+  var list = $('inboxList'), mail = $('mail'), litems = [];
+  function showMail(i){
+    litems.forEach(function(b, k){ b.setAttribute('aria-pressed', k === i ? 'true' : 'false'); });
+    var m = INBOX[i]; mail.textContent = '';
+    mail.appendChild(el('h4', '', 'Drafted request (not sent)'));
+    mail.appendChild(el('div', 'hd', 'To: ' + m.to + '  ·  From: your address'));
+    mail.appendChild(el('div', 'hd', 'Subject: ' + m.subj));
+    mail.appendChild(el('pre', '', m.body));
+    var act = el('div', 'act');
+    m.btn.forEach(function(x, k){ act.appendChild(el('span', 'ab' + (k === 0 ? ' p' : ''), x)); });
+    mail.appendChild(act);
+    var w = el('div', 'why'); w.appendChild(el('b', '', 'Why this matters. ')); w.appendChild(document.createTextNode(m.why)); mail.appendChild(w);
+  }
+  INBOX.forEach(function(m, i){
+    var b = el('button', 'li'); b.type = 'button'; b.setAttribute('aria-pressed', 'false');
+    var l = el('div'); l.appendChild(el('b', '', m.t)); l.appendChild(el('small', '', m.d));
+    b.appendChild(l); b.appendChild(el('span', 'pill ' + m.cls, m.tag));
+    b.addEventListener('click', function(){ showMail(i); });
+    list.appendChild(b); litems.push(b);
+  });
+  showMail(0);
+})();
+</script>
+</body>
+</html>
